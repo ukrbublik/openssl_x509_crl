@@ -389,6 +389,7 @@ abstract class ASN1
 	 * @return string
 	 */
 	public static function dec2hex_der($num) {
+		bcscale(0);
 		if($num == 0)
 			return chr(0);
 		$hex = "";
@@ -398,13 +399,17 @@ abstract class ASN1
 		}
 		while($num > 0) {
 			$quot = bcdiv($num, 256);
-			$rest = bcsub($num, bcmul($quot, 256));
+			//$mod = bcmod($num, 256);
+			$a = bcmul($quot, 256);
+			$rest = bcsub($num, $a);
+			
 			$num = $quot;
 			$hex .= chr($isneg ? (255 - $rest) : $rest);
 		}
 		if($rest >= 128 && !$isneg  ||  $rest < 128 && $isneg)
 			$hex = $hex . chr($isneg ? 255 : 0);
-		$hex = strrev($hex);	
+		$hex = strrev($hex);
+		
 		return $hex;
 	}
 	
@@ -416,6 +421,7 @@ abstract class ASN1
 	 * @return int
 	 */
 	public static function hex2dec_der($s) {
+		bcscale(0);
 		$num = 0;
 		$len = strlen($s);
 		$neg = (ord($s[0]) >= 128);
@@ -436,6 +442,7 @@ abstract class ASN1
 	 * @return 
 	 */
 	public static function hex2dec_oid($s) {
+		bcscale(0);
 		$oid = array();
 		$oct = ord($s[0]);
 		$oid[] = ($oct - $oct%40) / 40;
@@ -763,7 +770,7 @@ class ASN1_INT extends ASN1
 	public function __construct($t = null) {
 		if(!is_null($t)) {
 			if(is_numeric($t)) {
-				$this->content = (int)$t;
+				$this->content = /*(int)*/ $t;
 			} else {
 				throw new Exception($t . ' is not INT');
 			}
@@ -814,23 +821,23 @@ class ASN1_GENERALTIME extends ASN1
 	protected $isConstructed = false;
 	/** @var int $timeZone time zone name */
 	protected $timeZone = null;
-	private $yearDigits = 4;
+	protected $yearDigits = 4;
 	
 	/**
 	 * Constructor
 	 *
 	 * @param int $t timestamp
-	 * @param string|int $timeZone timezone name or offset in seconds (to encode)
+	 * @param string|int $tz timezone name or offset in seconds (to encode)
 	 */
 	public function __construct($t = null, $tz = null) {
 		if(!is_null($t)) {
 			$this->content = (int)$t;
-			if(is_numeric($timeZone)) {
+			if(is_numeric($tz)) {
 				$tzn = timezone_name_from_abbr("", $tz);
 				if($tzn !== false)
 					$this->timeZone = timezone_name_from_abbr("", $tzn);
-			} else {
-				$this->timeZone = $timeZone;
+			} else if(!is_null($tz)) {
+				$this->timeZone = $tz;
 			}
 		}
 	}
@@ -881,13 +888,13 @@ class ASN1_GENERALTIME extends ASN1
 			$orig_tz = date_default_timezone_get();
 			if($this->timeZone == 'UTC') {
 				date_default_timezone_set('UTC');
-				$ret = date(($this->yearDigits == 2 ? "y" : "Y")."mdHis\Z");
+				$ret = date(($this->yearDigits == 2 ? "y" : "Y")."mdHis\Z", $this->content);
 			} else if($this->timeZone) {
 				date_default_timezone_set($this->timeZone);
-				$ret = date(($this->yearDigits == 2 ? "y" : "Y")."mdHisO");
+				$ret = date(($this->yearDigits == 2 ? "y" : "Y")."mdHisO", $this->content);
 			} else {
 				//use current timezone
-				$ret = date(($this->yearDigits == 2 ? "y" : "Y")."mdHisO");
+				$ret = date(($this->yearDigits == 2 ? "y" : "Y")."mdHisO", $this->content);
 			}
 			date_default_timezone_set($orig_tz);
 		}
@@ -904,7 +911,7 @@ class ASN1_UTCTIME extends ASN1_GENERALTIME
 	protected $tag = 0x17;
 	protected $isConstructed = false;
 	protected $timeZone = 'UTC';
-	private $yearDigits = 2;
+	protected $yearDigits = 2;
 }
 
 
@@ -984,6 +991,7 @@ class ASN1_OID extends ASN1
 	}
 	
 	protected function decodeSimple(&$str, $start, $length) {
+		bcscale(0);
 		$s = substr($str, $start, $length);
 		$oid = array();
 		

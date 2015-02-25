@@ -35,18 +35,20 @@ class X509_CRL
 	 *   ), ... )<br>
 	 * )
 	 * @param resource $ca_pkey key pair for CA root certificate, got from openssl_pkey_get_private()
-	 * @param string $ca_data CA root certificate data in DER format
+	 * @param string $ca_cert CA root certificate data in DER format
 	 * @return string CRL in DER format
 	 */
-	static function create($ci, $ca_pkey, $ca_data) {
-		$ca_decoded = X509_CERT::decode($ca_data);
+	static function create($ci, $ca_pkey, $ca_cert) {
+		$ca_decoded = X509_CERT::decode($ca_cert);
 		
 		//CRL version
 		$crl_version = ((isset($ci['version']) && ($ci['version'] == 2 || $ci['version'] == 1)) ? $ci['version'] : 2);
 		
 		//Algorithm
 		$algs_cipher = array( OPENSSL_KEYTYPE_RSA, OPENSSL_KEYTYPE_DSA, OPENSSL_KEYTYPE_DH, OPENSSL_KEYTYPE_EC );
-		$algs_hash = array( /*OPENSSL_ALGO_DSS1, */OPENSSL_ALGO_SHA1, OPENSSL_ALGO_MD5, OPENSSL_ALGO_MD4, OPENSSL_ALGO_MD2 );
+		$algs_hash = array( /*OPENSSL_ALGO_DSS1, */OPENSSL_ALGO_SHA1, OPENSSL_ALGO_MD5, OPENSSL_ALGO_MD4 );
+		if(defined('OPENSSL_ALGO_MD2'))
+			$algs_hash[] = OPENSSL_ALGO_MD2;
 		
 		$ca_pkey_details = openssl_pkey_get_details($ca_pkey);
 		if($ca_pkey_details === false)
@@ -79,7 +81,11 @@ class X509_CRL
 		$tbsCertList->content['signature']->content['parameters'] = new ASN1_NULL;
 		$tbsCertList->content['issuer'] = X509_CERT::getExtVal_Subject($ca_decoded);
 		$tbsCertList->content['thisUpdate'] = new ASN1_UTCTIME( time() );
-		$tbsCertList->content['nextUpdate'] = new ASN1_UTCTIME( add_date(time(), 0, 0, 0, $ci['days']) );
+		if(function_exists('add_date'))
+			$nextUpdateTs = add_date(time(), 0, 0, 0, $ci['days']);
+		else
+			$nextUpdateTs = time() + $ci['days'] * 24*60*60;
+		$tbsCertList->content['nextUpdate'] = new ASN1_UTCTIME( $nextUpdateTs );
 		
 		//Revoked certs list
 		if(isset($ci['revoked']) && is_array($ci['revoked']) && !empty($ci['revoked'])) {
