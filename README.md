@@ -1,10 +1,11 @@
 # openssl_x509_gencrl
 
+<h3>Description:</h3>
 If you want to create own Certification authority (CA) on pure PHP with OpenSSL extension, 
 you need a function to create certificate revocation list (CRL) which is missing in OpenSSL extension.<br>
 This lib implements such function - <b>openssl_x509_gencrl()</b>
 
-<h2>Usage example:</h2>
+<h3>Usage example:</h3>
 <pre>$ci = array(
 	'no' => 1,
 	'version' => 2,
@@ -25,3 +26,9 @@ $ca_cert = X509::pem2der(file_get_contents('ca_cert.cer'));
 $crl_data = openssl_x509_gencrl($ci, $ca_pkey, $ca_cert);
 //$crl_data contains CRL in DER format
 </pre>
+
+<h3>Changelog:</h3>
+2011-05 - v1.0
+2015-03 - v1.1
+* Refactoring
+
