@@ -2,7 +2,7 @@
 
 <h3>Description:</h3>
 If you want to create own Certification authority (CA) on pure PHP with OpenSSL extension, 
-you need a function to create certificate revocation list (CRL) which is missing in OpenSSL extension.<br>
+you need a function to create certificate revocation list (CRL) which is missing in OpenSSL extension (<a href='https://bugs.php.net/bug.php?id=40046'>request #40046</a>).<br>
 This lib implements such function - <b>openssl_x509_gencrl()</b>
 
 <h3>Usage example:</h3>
