@@ -28,7 +28,7 @@ $crl_data = openssl_x509_gencrl($ci, $ca_pkey, $ca_cert);
 </pre>
 
 <h3>Changelog:</h3>
-2011-05 - v1.0
-2015-03 - v1.1
-* Refactoring
+2011-05 - v1.0<br>
+2015-03 - v1.1<br>
+* Refactoring<br>
 
