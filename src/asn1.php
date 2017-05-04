@@ -844,7 +844,7 @@ class ASN1_GENERALTIME extends ASN1
 	
 	protected function decodeSimple(&$str, $start, $length) {
 		$t = substr($str, $start, $length);	
-		if(preg_match("/^ (\d{2,4}) (0[1-9]|1[0-2]) (0[1-9]|[1-2][0-9]|30|31) ([0-1][0-9]|2[0-3]) ([0-5][0-9]) ([0-5][0-9])? Z $/sx", $t, $matches)) {	
+		if(preg_match("/^ (\d{2,4}) (0[1-9]|1[0-2]) (0[1-9]|[1-2][0-9]|30|31) ([0-1][0-9]|2[0-3]) ([0-5][0-9]) ([0-5][0-9]) Z $/sx", $t, $matches)) {	
 			$this->yearDigits = strlen($matches[1]);
 			$res = date_parse_from_format(($this->yearDigits == 2 ? "y" : "Y")."mdHis\Z", $t);
 			if(!isset($res['error_count']) || !$res['error_count']) {
@@ -857,7 +857,7 @@ class ASN1_GENERALTIME extends ASN1
 			} else {
 				throw new Exception("Can't parse time from string '$t'! Parse errors: " . implode('; ', $res['errors']));
 			}
-		} else if(preg_match("/^ (\d{2,4}) (0[1-9]|1[0-2]) (0[1-9]|[1-2][0-9]|30|31) ([0-1][0-9]|2[0-3]) ([0-5][0-9]) ([0-5][0-9])? ([+-] ([0-1][0-9]|2[0-3]) ([0-5][0-9])) $/sx", $t, $matches)) {	
+		} else if(preg_match("/^ (\d{2,4}) (0[1-9]|1[0-2]) (0[1-9]|[1-2][0-9]|30|31) ([0-1][0-9]|2[0-3]) ([0-5][0-9]) ([0-5][0-9]) ([+-] ([0-1][0-9]|2[0-3]) ([0-5][0-9])) $/sx", $t, $matches)) {	
 			$this->yearDigits = strlen($matches[1]);
 			$res = date_parse_from_format(($this->yearDigits == 2 ? "y" : "Y")."mdHisO", $t);
 			if(!isset($res['error_count']) || !$res['error_count']) {
