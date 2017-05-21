@@ -6,7 +6,12 @@ you need a function to create certificate revocation list (CRL) which is missing
 This lib implements such function - <b>openssl_x509_gencrl()</b>
 
 <h3>Usage example:</h3>
-<pre>$ci = array(
+<pre>
+use Ukrbublik\openssl_x509_gencrl\X509;
+use Ukrbublik\openssl_x509_gencrl\X509_CERT;
+use Ukrbublik\openssl_x509_gencrl\X509_CRL;
+
+$ci = array(
 	'no' => 1,
 	'version' => 2,
 	'days' => 30,

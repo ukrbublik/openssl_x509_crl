@@ -1,9 +1,14 @@
 <?php
+
+//use "composer install" to run this example
+
+namespace Ukrbublik\openssl_x509_gencrl;
+require_once "vendor/autoload.php";
+
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 header("Content-Type: text/html; charset=utf-8");
-require_once("../src/x509_cert.php");
-require_once("../src/x509_crl.php");
+
 
 //Check server requirements
 X509::checkServer();
@@ -27,7 +32,7 @@ $ci = array(
 $ca_pkey = openssl_pkey_get_private(file_get_contents('ca_key.key'));
 $ca_cert = X509::pem2der(file_get_contents('ca_cert.cer'));
 $crl_data = X509_CRL::create($ci, $ca_pkey, $ca_cert);
-if(file_put_contents("test_crl.crl", $crl_data))
+if(file_put_contents("test_crl.crl", X509::der2pem4crl($crl_data)))
 	echo "<b>CRL generated and saved to 'test_crl.crl'.</b><br><hr>";
 
 //Parse CA certificate

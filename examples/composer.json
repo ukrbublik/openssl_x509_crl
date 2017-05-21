@@ -1,0 +1,17 @@
+{
+    "name": "ukrbublik/openssl_x509_gencrl_examples",
+    "description": "Examples for ukrbublik/openssl_x509_gencrl",
+    "type": "test",
+    "authors": [
+        {
+            "name": "Denis Oblogin",
+            "email": "ukrbublik@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Ukrbublik\\openssl_x509_gencrl\\": "../src/"
+        }
+    }
+}

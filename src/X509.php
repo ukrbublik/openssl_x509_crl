@@ -5,6 +5,8 @@
  *
  */
  
+namespace Ukrbublik\openssl_x509_gencrl;
+
 /**
  * X.509
  *
@@ -195,11 +197,11 @@ class X509
 	 */
 	public static function checkServer() {
 		if(!function_exists('bcadd'))
-			throw new Exception("No bcmath extension!");
+			throw new \Exception("No bcmath extension!");
 		if(!function_exists('openssl_pkey_get_details'))
-			throw new Exception("No openssl extension!");
+			throw new \Exception("No openssl extension!");
 		if(!function_exists('date_parse_from_format')) {
-			//throw new Exception("PHP 5.3+ is required!");
+			//throw new \Exception("PHP 5.3+ is required!");
 			
 			//@src http://stackoverflow.com/questions/6668223/php-date-parse-from-format-alternative-in-php-5-2
 			function date_parse_from_format($format, $date) {

@@ -6,9 +6,27 @@
  * @see https://www.ietf.org/rfc/rfc2459.txt
  */
 
-require_once("asn1.php");
-require_once("oid.php");
-require_once("x509.php");
+namespace Ukrbublik\openssl_x509_gencrl;
+
+use Ukrbublik\openssl_x509_gencrl\ASN1;
+use Ukrbublik\openssl_x509_gencrl\ASN1_SIMPLE;
+use Ukrbublik\openssl_x509_gencrl\ASN1_SEQUENCE;
+use Ukrbublik\openssl_x509_gencrl\ASN1_SET;
+use Ukrbublik\openssl_x509_gencrl\ASN1_NULL;
+use Ukrbublik\openssl_x509_gencrl\ASN1_UTF8STRING;
+use Ukrbublik\openssl_x509_gencrl\ASN1_TELETEXSTRING;
+use Ukrbublik\openssl_x509_gencrl\ASN1_ASCIISTRING;
+use Ukrbublik\openssl_x509_gencrl\ASN1_BITSTRING;
+use Ukrbublik\openssl_x509_gencrl\ASN1_OCTETSTRING;
+use Ukrbublik\openssl_x509_gencrl\ASN1_INT;
+use Ukrbublik\openssl_x509_gencrl\ASN1_ENUM;
+use Ukrbublik\openssl_x509_gencrl\ASN1_GENERALTIME;
+use Ukrbublik\openssl_x509_gencrl\ASN1_UTCTIME;
+use Ukrbublik\openssl_x509_gencrl\ASN1_BOOL;
+use Ukrbublik\openssl_x509_gencrl\ASN1_OID;
+use Ukrbublik\openssl_x509_gencrl\OID;
+use Ukrbublik\openssl_x509_gencrl\X509;
+
 
 /**
  * X.509 certificate
@@ -270,7 +288,7 @@ class X509_CERT
 	}
 	
 	//Internal undocumented function
-	protected static function parse_GeneralNames(&$a) {
+	protected static function parse_GeneralNames($a) {
 		if($a === null)
 			return null;
 		
@@ -282,7 +300,7 @@ class X509_CERT
 	}
 	
 	//Internal undocumented function
-	protected static function parse_GeneralName(&$v) {
+	protected static function parse_GeneralName($v) {
 		$gn = array();
 		switch($v->getTag()) {
 			case 0:
@@ -323,7 +341,7 @@ class X509_CERT
 	}
 	
 	//Internal undocumented function
-	protected static function parse_Name(&$a) {
+	protected static function parse_Name($a) {
 		$dn = array();
 		
 		foreach($a->content as $k => $v) {
