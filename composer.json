@@ -1,0 +1,25 @@
+{
+    "name": "ukrbublik/openssl_x509_gencrl",
+    "description": "Missing OpenSSL function on PHP to create CRL (certificate revocation list) for CA",
+    "keywords": ["php", "openssl", "openssl-extension", "x509", "x.509", "asn1", "asn.1", "cryptography", "certificate", "certificates", "certificate-authority", "certificates", "certificate-revocation-lists"],
+    "type": "library",
+    "homepage": "https://github.com/ukrbublik/openssl_x509_gencrl",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "ukrbublik",
+            "email": "ukrbublik@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+	"ext-openssl": "*"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Ukrbublik\\openssl_x509_gencrl\\": "src/"
+        }
+    }
+}
