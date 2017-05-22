@@ -1,8 +1,8 @@
 <?php
 
-namespace Ukrbublik\openssl_x509_gencrl;
+namespace Ukrbublik\openssl_x509_crl;
 
-use Ukrbublik\openssl_x509_gencrl\ASN1_GENERALTIME;
+use Ukrbublik\openssl_x509_crl\ASN1_GENERALTIME;
 
 /*
  * ANS1 UTC time type

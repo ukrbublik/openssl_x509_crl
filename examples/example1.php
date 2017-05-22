@@ -2,7 +2,7 @@
 
 //use "composer install" to run this example
 
-namespace Ukrbublik\openssl_x509_gencrl;
+namespace Ukrbublik\openssl_x509_crl;
 require_once "vendor/autoload.php";
 
 error_reporting(E_ALL);

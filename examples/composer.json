@@ -1,6 +1,6 @@
 {
-    "name": "ukrbublik/openssl_x509_gencrl_examples",
-    "description": "Examples for ukrbublik/openssl_x509_gencrl",
+    "name": "ukrbublik/openssl_x509_crl_examples",
+    "description": "Examples for ukrbublik/openssl_x509_crl",
     "type": "test",
     "authors": [
         {
@@ -11,7 +11,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Ukrbublik\\openssl_x509_gencrl\\": "../src/"
+            "Ukrbublik\\openssl_x509_crl\\": "../src/"
         }
     }
 }

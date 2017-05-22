@@ -7,7 +7,7 @@
  * @see http://www.alvestrand.no/objectid/
  */
 
-namespace Ukrbublik\openssl_x509_gencrl;
+namespace Ukrbublik\openssl_x509_crl;
 
 /**
  * OID

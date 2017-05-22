@@ -1,8 +1,8 @@
 <?php
 
-namespace Ukrbublik\openssl_x509_gencrl;
+namespace Ukrbublik\openssl_x509_crl;
 
-use Ukrbublik\openssl_x509_gencrl\ASN1;
+use Ukrbublik\openssl_x509_crl\ASN1;
 
 /*
  * ANS1 bit string type

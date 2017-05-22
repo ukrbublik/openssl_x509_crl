@@ -6,27 +6,27 @@
  * @see https://www.ietf.org/rfc/rfc2459.txt
  */
 
-namespace Ukrbublik\openssl_x509_gencrl;
+namespace Ukrbublik\openssl_x509_crl;
 
-use Ukrbublik\openssl_x509_gencrl\ASN1;
-use Ukrbublik\openssl_x509_gencrl\ASN1_SIMPLE;
-use Ukrbublik\openssl_x509_gencrl\ASN1_SEQUENCE;
-use Ukrbublik\openssl_x509_gencrl\ASN1_SET;
-use Ukrbublik\openssl_x509_gencrl\ASN1_NULL;
-use Ukrbublik\openssl_x509_gencrl\ASN1_UTF8STRING;
-use Ukrbublik\openssl_x509_gencrl\ASN1_TELETEXSTRING;
-use Ukrbublik\openssl_x509_gencrl\ASN1_ASCIISTRING;
-use Ukrbublik\openssl_x509_gencrl\ASN1_BITSTRING;
-use Ukrbublik\openssl_x509_gencrl\ASN1_OCTETSTRING;
-use Ukrbublik\openssl_x509_gencrl\ASN1_INT;
-use Ukrbublik\openssl_x509_gencrl\ASN1_ENUM;
-use Ukrbublik\openssl_x509_gencrl\ASN1_GENERALTIME;
-use Ukrbublik\openssl_x509_gencrl\ASN1_UTCTIME;
-use Ukrbublik\openssl_x509_gencrl\ASN1_BOOL;
-use Ukrbublik\openssl_x509_gencrl\ASN1_OID;
-use Ukrbublik\openssl_x509_gencrl\OID;
-use Ukrbublik\openssl_x509_gencrl\X509;
-use Ukrbublik\openssl_x509_gencrl\X509_CERT;
+use Ukrbublik\openssl_x509_crl\ASN1;
+use Ukrbublik\openssl_x509_crl\ASN1_SIMPLE;
+use Ukrbublik\openssl_x509_crl\ASN1_SEQUENCE;
+use Ukrbublik\openssl_x509_crl\ASN1_SET;
+use Ukrbublik\openssl_x509_crl\ASN1_NULL;
+use Ukrbublik\openssl_x509_crl\ASN1_UTF8STRING;
+use Ukrbublik\openssl_x509_crl\ASN1_TELETEXSTRING;
+use Ukrbublik\openssl_x509_crl\ASN1_ASCIISTRING;
+use Ukrbublik\openssl_x509_crl\ASN1_BITSTRING;
+use Ukrbublik\openssl_x509_crl\ASN1_OCTETSTRING;
+use Ukrbublik\openssl_x509_crl\ASN1_INT;
+use Ukrbublik\openssl_x509_crl\ASN1_ENUM;
+use Ukrbublik\openssl_x509_crl\ASN1_GENERALTIME;
+use Ukrbublik\openssl_x509_crl\ASN1_UTCTIME;
+use Ukrbublik\openssl_x509_crl\ASN1_BOOL;
+use Ukrbublik\openssl_x509_crl\ASN1_OID;
+use Ukrbublik\openssl_x509_crl\OID;
+use Ukrbublik\openssl_x509_crl\X509;
+use Ukrbublik\openssl_x509_crl\X509_CERT;
 
 
 /**
@@ -198,7 +198,7 @@ class X509_CRL
  *
  * @see X509_CRL::create()
  */
-function openssl_x509_gencrl($ci, $ca_pkey, $ca_data) {
+function openssl_x509_crl($ci, $ca_pkey, $ca_data) {
 	return X509_CRL::create($ci, $ca_pkey, $ca_data);
 }
 

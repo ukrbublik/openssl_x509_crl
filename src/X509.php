@@ -5,7 +5,7 @@
  *
  */
  
-namespace Ukrbublik\openssl_x509_gencrl;
+namespace Ukrbublik\openssl_x509_crl;
 
 /**
  * X.509
